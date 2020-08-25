@@ -7,5 +7,5 @@ const createAction = <T>(type: string): ActionCreator<T> => {
   return actionCreator;
 };
 
-export const add = createAction<{num: number}>('ADD');
+export const changeDog = createAction<{url: string}>('CHANGE_DOG');
 export const addFromSaga = createAction<{num: number}>('ADD_FROM_SAGA');

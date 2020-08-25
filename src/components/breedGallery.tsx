@@ -1,6 +1,4 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { add } from "../store/actions/action";
 import { Button } from "@material-ui/core";
 
 // props of action-creator
@@ -17,11 +15,3 @@ export const AddButton = ({ add }: DispatchProps & OwnProps) => {
   return <Button onClick={add}>Add</Button>;
 };
 
-export default connect(
-  null,
-  (dispatch): DispatchProps => ({
-    add: (num: number) => {
-      return dispatch(add({ num: 1 }));
-    }
-  })
-)(AddButton);

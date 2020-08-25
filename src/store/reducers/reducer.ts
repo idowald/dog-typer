@@ -1,29 +1,34 @@
-import {  combineReducers } from "redux";
+import { combineReducers } from "redux";
 import { reducerWithInitialState } from "typescript-fsa-reducers";
-import { addFromSaga} from "../actions/action";
+import { addFromSaga, changeDog } from "../actions/action";
 
-export interface CounterState {
-  count: number;
+export interface DogState {
+  dogPlaceHolderUrl: string;
+  dogType?: string;
+  galleryUrls: string[];
 }
 
 export interface State {
-  counter: CounterState;
+  dog: DogState;
 }
 
 const initialState: State = {
-  counter: { count: 0 }
+  dog: {
+    dogPlaceHolderUrl: `${process.env.PUBLIC_URL}/dogBreedPlaceholder.png`,
+    dogType: undefined,
+    galleryUrls: []
+  }
 };
 
-const counterReducer = reducerWithInitialState(initialState.counter)
-  .case(addFromSaga, (state, { num }) => {
-    console.log(num);
+const dogReducer = reducerWithInitialState(initialState.dog)
+  .case(changeDog, (state, { url }) => {
     return {
       ...state,
-      count: state.count + num
+      dogPlaceHolderUrl: url
     };
   })
   .build();
 
 export const reducer = combineReducers<State>({
-  counter: counterReducer
+  dog: dogReducer
 });
