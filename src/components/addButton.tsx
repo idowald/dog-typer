@@ -11,18 +11,17 @@ interface DispatchProps {
 
 // props from parent element
 interface OwnProps {
-  delay?: number;
 }
 
 export const AddButton = ({ add }: DispatchProps & OwnProps) => {
-  return <Button onClick={() => add()}>Add</Button>;
+  return <Button onClick={add}>Add</Button>;
 };
 
 export default connect(
   null,
   (dispatch): DispatchProps => ({
     add: (num: number) => {
-      return dispatch(add({ num: 1}));
+      return dispatch(add({ num: 1 }));
     }
   })
 )(AddButton);

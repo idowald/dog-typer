@@ -1,4 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Why I've created this?
+The year is 2020, versions are old, versions are new. Things don't work together.
+
+This repo will let bootstrap redux+react+sagas+material out of the box with Redux dev tools as well.
+
+Just go to `store` directive and learn how to control Sagas easily.
+ 
 
 ## Available Scripts
 

@@ -4,7 +4,6 @@ import "babel-polyfill";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import configureStore from "./store/store";
-// @ts-ignore
 import { Provider } from "react-redux";
 
 const store = configureStore();
