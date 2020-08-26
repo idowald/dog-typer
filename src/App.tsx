@@ -29,13 +29,12 @@ function App() {
           margin: "auto",
           width: "50%",
           backgroundColor: "#f5f5f5",
-          minHeight: "1000px"
         }}
       >
         <DogPlaceHolderContainer />
         <DogDescriptionContainer />
-        <BreedGalleryContainer />
       </div>
+      <BreedGalleryContainer />
     </div>
   );
 }

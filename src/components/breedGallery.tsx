@@ -1,4 +1,5 @@
 import * as React from "react";
+import VirtualList from "react-tiny-virtual-list";
 
 // props of action-creator
 interface DispatchProps {
@@ -12,21 +13,31 @@ interface OwnProps {
 
 export const BreedGallery = ({ galleryUrls }: OwnProps) => {
   return (
-    <div>
-      {galleryUrls.map(url => (
-        <div key={url}>{url}</div>
-      ))}
+    <div style={{ marginLeft: "135px" }}>
+      <VirtualList
+        width="100%"
+        height={600}
+        itemCount={Math.floor(galleryUrls.length / 2)}
+        itemSize={360} // Also supports variable heights (array or function getter)
+        renderItem={({ index, style }) => (
+          <div key={index} style={style}>
+            <img
+              src={galleryUrls[index * 2]}
+              alt="a picture of dog"
+              height="360px"
+              width="640px"
+            />
+            {galleryUrls.length > index * 2 + 1 ? (
+              <img
+                src={galleryUrls[index * 2 + 1]}
+                alt="a picture of dog"
+                height="360px"
+                width="640px"
+              />
+            ) : null}
+          </div>
+        )}
+      />
     </div>
   );
 };
-
-// interface ColumnData {
-//   dataKey: string;
-//   label: string;
-//   numeric?: boolean;
-//   width: number;
-// }
-//
-// interface Row {
-//   index: number;
-// }
