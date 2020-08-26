@@ -5,6 +5,7 @@ import { State, reducer } from "./reducers/reducer";
 import rootSaga from "./sagas";
 import { AnyAction } from "typescript-fsa";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { setPristine } from "./actions/action";
 
 export default (): Store<State> => {
   const sagaMiddleware = createSagaMiddleware();
@@ -14,5 +15,6 @@ export default (): Store<State> => {
     composeWithDevTools(applyMiddleware(sagaMiddleware, logger))
   );
   sagaMiddleware.run(rootSaga);
+  store.dispatch(setPristine({}));
   return store;
 };

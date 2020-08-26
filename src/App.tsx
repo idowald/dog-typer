@@ -3,6 +3,7 @@ import { AppBar, createStyles, Theme, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { DogPlaceHolderContainer } from "./containers/dogPlaceHolder";
 import { DogDescriptionContainer } from "./containers/dogDescription";
+import { BreedGalleryContainer } from "./containers/breedGalleryContainer";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,6 +34,7 @@ function App() {
       >
         <DogPlaceHolderContainer />
         <DogDescriptionContainer />
+        <BreedGalleryContainer />
       </div>
     </div>
   );

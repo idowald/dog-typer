@@ -1,17 +1,14 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { State } from "../store/reducers/reducer";
 import {
   Card,
   CardActions,
   CardContent,
   createStyles,
-  Paper,
   Theme,
   Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import {DogUploaderContainer} from "../containers/dogUploaderContainer";
+import { DogUploaderContainer } from "../containers/dogUploaderContainer";
 
 // props from parent element
 interface OwnProps {
@@ -20,7 +17,7 @@ interface OwnProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     dogDescription: {
-      minWidth: "300px",
+      minWidth: "300px"
     }
   })
 );
@@ -36,10 +33,8 @@ export const DogDescription = ({ dogType }: OwnProps) => {
         </Typography>
       </CardContent>
       <CardActions>
-          <DogUploaderContainer />
+        <DogUploaderContainer />
       </CardActions>
     </Card>
   );
 };
-
-
