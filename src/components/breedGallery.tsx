@@ -23,14 +23,14 @@ export const BreedGallery = ({ galleryUrls }: OwnProps) => {
           <div key={index} style={style}>
             <img
               src={galleryUrls[index * 2]}
-              alt="a picture of dog"
+              alt="dog breed"
               height="360px"
               width="640px"
             />
             {galleryUrls.length > index * 2 + 1 ? (
               <img
                 src={galleryUrls[index * 2 + 1]}
-                alt="a picture of dog"
+                alt="dog breed2"
                 height="360px"
                 width="640px"
               />

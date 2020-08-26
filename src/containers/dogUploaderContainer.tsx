@@ -3,7 +3,6 @@ import { State } from "../store/reducers/reducer";
 import * as React from "react";
 import { changeDog } from "../store/actions/action";
 import { DispatchProps, DogUploader } from "../components/dogUploader";
-import { getModelLoaded } from "../store/selectors/dogSelector";
 
 export const DogUploaderContainer = connect<State, DispatchProps>(
   // @ts-ignore

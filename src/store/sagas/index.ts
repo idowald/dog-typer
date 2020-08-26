@@ -15,14 +15,10 @@ import {
   modelLoaded,
   setPristine
 } from "../actions/action";
-import { imageService } from "../services/imageService";
 import { getModelLoaded, getUrl } from "../selectors/dogSelector";
 import { dogService } from "../services/dogService";
+import { removeUrlResource } from "./imageSagas";
 
-function* removeUrlResource({}: ReturnType<typeof changeDog>) {
-  const url = yield select(getUrl);
-  imageService.revokeUrl(url);
-}
 function* setPristineSage() {
   // put anything you want to init here
   yield fork(getDogBreeds);

@@ -1,9 +1,15 @@
 import React from "react";
-import { AppBar, createStyles, Theme, Typography } from "@material-ui/core";
+import {
+  AppBar,
+  createStyles,
+  Theme,
+  Typography
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { DogPlaceHolderContainer } from "./containers/dogPlaceHolder";
 import { DogDescriptionContainer } from "./containers/dogDescription";
 import { BreedGalleryContainer } from "./containers/breedGalleryContainer";
+import { DogUploaderContainer } from "./containers/dogUploaderContainer";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,11 +34,12 @@ function App() {
         style={{
           margin: "auto",
           width: "50%",
-          backgroundColor: "#f5f5f5",
+          backgroundColor: "#f5f5f5"
         }}
       >
         <DogPlaceHolderContainer />
         <DogDescriptionContainer />
+        <DogUploaderContainer />
       </div>
       <BreedGalleryContainer />
     </div>

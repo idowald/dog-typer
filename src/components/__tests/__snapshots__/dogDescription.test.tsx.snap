@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders learn react link 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root makeStyles-dogDescription-1 MuiPaper-outlined MuiPaper-rounded"
+>
+  <div
+    className="MuiCardContent-root"
+  >
+    <h2
+      className="MuiTypography-root MuiTypography-h5"
+    >
+      Your dog type is: testy
+       
+    </h2>
+  </div>
+</div>
+`;

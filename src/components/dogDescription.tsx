@@ -1,14 +1,12 @@
 import * as React from "react";
 import {
   Card,
-  CardActions,
   CardContent,
   createStyles,
   Theme,
   Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { DogUploaderContainer } from "../containers/dogUploaderContainer";
 
 // props from parent element
 interface OwnProps {
@@ -32,9 +30,6 @@ export const DogDescription = ({ dogType }: OwnProps) => {
             : "You don't have a dog yet I believe"}{" "}
         </Typography>
       </CardContent>
-      <CardActions>
-        <DogUploaderContainer />
-      </CardActions>
     </Card>
   );
 };

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CircularProgress, createStyles, Theme } from "@material-ui/core";
+import { CircularProgress, createStyles } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 // props from parent element
@@ -7,7 +7,7 @@ interface OwnProps {
   dogPlaceHolderUrl: string;
   loadingBreed: boolean;
 }
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     hidden: {
       display: "none"

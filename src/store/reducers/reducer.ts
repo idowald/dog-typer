@@ -20,7 +20,7 @@ export interface State {
   dog: DogState;
 }
 
-const initialState: State = {
+export const initialState: State = {
   dog: {
     dogPlaceHolderUrl: `${process.env.PUBLIC_URL}/dogBreedPlaceholder.png`,
     dogType: undefined,
@@ -29,17 +29,17 @@ const initialState: State = {
     modelLoaded: false
   }
 };
-
+export const changeDogReducer = (state: DogState, { url }: { url: string }) => {
+  return {
+    ...state,
+    dogPlaceHolderUrl: url,
+    // not the best way- it should be from saga to be more precise with data manipulation and side effects
+    // I had to take a short cut
+    loadingBreed: true
+  };
+};
 const dogReducer = reducerWithInitialState(initialState.dog)
-  .case(changeDog, (state, { url }) => {
-    return {
-      ...state,
-      dogPlaceHolderUrl: url,
-      // not the best way- it should be from saga to be more precise with data manipulation and side effects
-      // I had to take a short cut
-      loadingBreed: true
-    };
-  })
+  .case(changeDog, changeDogReducer)
   .case(dogClassified, (state, { dogType }) => ({
     ...state,
     loadingBreed: false,
