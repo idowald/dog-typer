@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders learn react link 1`] = `
+exports[`renders dog place holder 1`] = `
 <div>
   <div
     className="MuiCircularProgress-root makeStyles-hidden-1 MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"

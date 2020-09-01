@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders learn react link 1`] = `
+exports[`renders dog uploader 1`] = `
 <label
   className="dogUploader"
   htmlFor="upload-photo"

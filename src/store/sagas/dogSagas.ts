@@ -8,6 +8,9 @@ import {
 import { getModelLoaded, getUrl } from "../selectors/dogSelector";
 import { dogService } from "../services/dogService";
 
+export function* getDogBreeds() {
+  yield call(dogService.getAllBreeds);
+}
 export function* changeDogImage() {
   // in real apps we can handle logic error flows in more generic way like to listen to all events
   // of some type and clean the error message on start of each.

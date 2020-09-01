@@ -51,7 +51,6 @@ class DogService {
     }
   }
   public async loadModel() {
-    // TODO this model should be in another service, but i took a shortcut to scope the asssignment on time
     this.model = await mobilenet.load();
   }
   public async classifyDog({ url }: { url: string }) {

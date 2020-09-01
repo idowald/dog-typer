@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 
 import { DogPlaceHolder } from "../dogPlaceHolder";
 
-test("renders learn react link", () => {
+test("renders dog place holder", () => {
   const rendered = renderer.create(
     <DogPlaceHolder
       dogPlaceHolderUrl={`${process.env.PUBLIC_URL}/dogBreedPlaceholder.png`}

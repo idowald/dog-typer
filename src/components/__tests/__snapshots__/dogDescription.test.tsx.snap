@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders learn react link 1`] = `
+exports[`test dog description render 1`] = `
 <div
   className="MuiPaper-root MuiCard-root makeStyles-dogDescriptionSmall-2 MuiPaper-outlined MuiPaper-rounded"
 >

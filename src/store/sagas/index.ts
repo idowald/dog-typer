@@ -7,16 +7,14 @@ import {
 } from "../actions/action";
 import { dogService } from "../services/dogService";
 import { removeUrlResource } from "./imageSagas";
-import { changeDogImage } from "./dogSagas";
+import { changeDogImage, getDogBreeds } from "./dogSagas";
 
 function* setPristineSage() {
   // put anything you want to init here
   yield fork(getDogBreeds);
   yield fork(getModel);
 }
-function* getDogBreeds() {
-  yield call(dogService.getAllBreeds);
-}
+
 function* getModel() {
   yield call(dogService.loadModel);
   yield put(modelLoaded({}));

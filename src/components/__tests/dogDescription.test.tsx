@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {DogDescription, generateDescriptionText} from "../dogDescription";
 
-test("renders learn react link", () => {
+test("test dog description render", () => {
   const rendered = renderer.create(
     <DogDescription dogType={"testy"} errorMessage={""} />
   );
