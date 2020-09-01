@@ -2,7 +2,7 @@ import {select} from "@redux-saga/core/effects";
 import {getUrl} from "../../selectors/dogSelector";
 import {removeUrlResource} from "../imageSagas";
 
-it("example to test sagas effect", () => {
+it("test images sagas effect", () => {
   const gen = removeUrlResource({
     error: false,
     meta: undefined,

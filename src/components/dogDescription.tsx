@@ -25,7 +25,10 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-const generateText = ({ dogType, errorMessage }: OwnProps): string => {
+export const generateDescriptionText = ({
+  dogType,
+  errorMessage
+}: OwnProps): string => {
   if (errorMessage) {
     return errorMessage;
   }
@@ -47,7 +50,7 @@ export const DogDescription = ({ dogType, errorMessage }: OwnProps) => {
     >
       <CardContent>
         <Typography variant="h5" component="h2">
-          {generateText({ dogType, errorMessage })}
+          {generateDescriptionText({ dogType, errorMessage })}
         </Typography>
       </CardContent>
     </Card>
