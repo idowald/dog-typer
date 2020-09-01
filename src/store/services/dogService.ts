@@ -7,7 +7,7 @@ interface DogsAPI {
 }
 interface DogsPicturesAPI {
   status: string;
-  message:  string[];
+  message: string[];
 }
 interface Classification {
   className: string;
@@ -26,9 +26,9 @@ class DogService {
   public async getBreedPictures(breed: string) {
     const response = await fetch(`https://dog.ceo/api/breed/${breed}/images`);
     let data: DogsPicturesAPI = await response.json();
-    if (data.status === "success"){
+    if (data.status === "success") {
       return data.message;
-    }else{
+    } else {
       console.error("TODO error handling getBreedPictures");
     }
   }
@@ -79,16 +79,25 @@ class DogService {
               predictions[0].className.toLowerCase().replace("-", "")
           );
         });
-        if (detectedBreed){
-          return detectedBreed;
-        }else{
+        if (detectedBreed) {
+          return { message: "", detectedBreed };
+        } else {
           console.error("we don't have that dog in the db");
+          return { message: "Could not detect this dog", detectedBreed: "" };
         }
       } else {
         console.error("couldn't make predictions");
+        return {
+          message: "Problems with predictions, try again later",
+          detectedBreed: ""
+        };
       }
     } else {
-      console.error("TODO deal with errors no image/model");
+      console.error("couldn't load image");
+      return {
+        message: "Could not load image, are you sure it is a legit file?",
+        detectedBreed: ""
+      };
     }
   }
 }

@@ -12,6 +12,7 @@ import {
   changeDog,
   dogBreedPictures,
   dogClassified,
+  errorMessage,
   modelLoaded,
   setPristine
 } from "../actions/action";
@@ -32,19 +33,27 @@ function* getModel() {
   yield put(modelLoaded({}));
 }
 function* changeDogImage() {
+  // in real apps we can handle logic error flows in more generic way like listen to all events
+  // of some type and clean the error message.
+  yield put(errorMessage({ message: "" }));
   const url = yield select(getUrl);
   const modelLoadedState = yield select(getModelLoaded);
   if (!modelLoadedState) {
     yield take(modelLoaded.type); // wait till complete loading
   }
   const prediction = yield call(dogService.classifyDog, { url });
-  if (prediction) {
-    yield put(dogClassified({ dogType: prediction }));
-    const galleryUrls = yield call(dogService.getBreedPictures, prediction);
+  if (prediction.detectedBreed) {
+    yield put(dogClassified({ dogType: prediction.detectedBreed }));
+    const galleryUrls = yield call(
+      dogService.getBreedPictures,
+      prediction.detectedBreed
+    );
     // TODO error handling galleryURLS
     yield put(dogBreedPictures({ galleryUrls }));
   } else {
-    console.error("TODO deal with errors changeDogImage");
+    if (prediction.message) {
+      yield put(errorMessage({ message: prediction.message }));
+    }
   }
 }
 export default function* root() {

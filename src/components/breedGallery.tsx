@@ -13,31 +13,29 @@ interface OwnProps {
 
 export const BreedGallery = ({ galleryUrls }: OwnProps) => {
   return (
-    <div style={{ marginLeft: "135px" }}>
-      <VirtualList
-        width="100%"
-        height={600}
-        itemCount={Math.floor(galleryUrls.length / 2)}
-        itemSize={360} // Also supports variable heights (array or function getter)
-        renderItem={({ index, style }) => (
-          <div key={index} style={style}>
+    <VirtualList
+      width="100%"
+      height={600}
+      itemCount={Math.floor(galleryUrls.length / 2)}
+      itemSize={360} // Also supports variable heights (array or function getter)
+      renderItem={({ index, style }) => (
+        <div key={index} style={style}>
+          <img
+            src={galleryUrls[index * 2]}
+            alt="dog breed"
+            height="360px"
+            width="640px"
+          />
+          {galleryUrls.length > index * 2 + 1 ? (
             <img
-              src={galleryUrls[index * 2]}
-              alt="dog breed"
+              src={galleryUrls[index * 2 + 1]}
+              alt="dog breed2"
               height="360px"
               width="640px"
             />
-            {galleryUrls.length > index * 2 + 1 ? (
-              <img
-                src={galleryUrls[index * 2 + 1]}
-                alt="dog breed2"
-                height="360px"
-                width="640px"
-              />
-            ) : null}
-          </div>
-        )}
-      />
-    </div>
+          ) : null}
+        </div>
+      )}
+    />
   );
 };

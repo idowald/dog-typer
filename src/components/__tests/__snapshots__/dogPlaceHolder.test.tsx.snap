@@ -29,6 +29,7 @@ exports[`renders learn react link 1`] = `
   </div>
   <img
     alt="dog place holder"
+    className="makeStyles-sm-3"
     height="360px"
     id="placeHolderImageId"
     src="/dogBreedPlaceholder.png"

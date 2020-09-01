@@ -4,30 +4,50 @@ import {
   CardContent,
   createStyles,
   Theme,
-  Typography
+  Typography,
+  useMediaQuery,
+  useTheme
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 // props from parent element
 interface OwnProps {
   dogType?: string;
+  errorMessage: string;
 }
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     dogDescription: {
-      minWidth: "300px"
+      width: "560px"
+    },
+    dogDescriptionSmall: {
+      width: "calc(640px *0.5)"
     }
   })
 );
-export const DogDescription = ({ dogType }: OwnProps) => {
+const generateText = ({ dogType, errorMessage }: OwnProps): string => {
+  if (errorMessage) {
+    return errorMessage;
+  }
+  if (dogType) {
+    return `Your dog type is: ${dogType}`;
+  }
+  return "You don't have a dog yet I believe";
+};
+export const DogDescription = ({ dogType, errorMessage }: OwnProps) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const isSmallScreen = !useMediaQuery(theme.breakpoints.up("sm"));
   return (
-    <Card className={classes.dogDescription} variant="outlined">
+    <Card
+      className={
+        isSmallScreen ? classes.dogDescriptionSmall : classes.dogDescription
+      }
+      variant="outlined"
+    >
       <CardContent>
         <Typography variant="h5" component="h2">
-          {dogType
-            ? `Your dog type is: ${dogType}`
-            : "You don't have a dog yet I believe"}{" "}
+          {generateText({ dogType, errorMessage })}
         </Typography>
       </CardContent>
     </Card>

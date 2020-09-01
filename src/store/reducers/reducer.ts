@@ -4,6 +4,7 @@ import {
   changeDog,
   dogBreedPictures,
   dogClassified,
+  errorMessage,
   modelLoaded
 } from "../actions/action";
 
@@ -11,6 +12,7 @@ export interface DogState {
   dogPlaceHolderUrl: string;
   dogType?: string;
   galleryUrls: string[];
+  errorMessage: string;
   // a small short cut I took to finish the task- can be improved with actions typing google createRequestTypes for examples
   loadingBreed: boolean;
   modelLoaded: boolean;
@@ -22,8 +24,9 @@ export interface State {
 
 export const initialState: State = {
   dog: {
+    errorMessage: "",
     dogPlaceHolderUrl: `${process.env.PUBLIC_URL}/dogBreedPlaceholder.png`,
-    dogType: undefined,
+    dogType: "",
     galleryUrls: [],
     loadingBreed: false,
     modelLoaded: false
@@ -49,6 +52,11 @@ const dogReducer = reducerWithInitialState(initialState.dog)
   .case(dogBreedPictures, (state, { galleryUrls }) => ({
     ...state,
     galleryUrls
+  }))
+  .case(errorMessage, (state, { message }) => ({
+    ...state,
+    errorMessage: message,
+    loadingBreed: false
   }))
   .build();
 

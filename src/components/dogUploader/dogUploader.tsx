@@ -19,7 +19,11 @@ export interface OwnProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     hidden: {
-      visibility: "hidden"
+      display: "none"
+    },
+    shown: {
+      position: "absolute",
+      left: "45%"
     }
   })
 );
@@ -40,7 +44,7 @@ export const DogUploader = ({
         Upload your dog
         <CircularProgress
           color="inherit"
-          className={loadingModel ? "" : classes.hidden}
+          className={loadingModel ? classes.shown : classes.hidden}
         />
         <input
           id="upload-photo"
