@@ -1,6 +1,5 @@
 import * as mobilenet from "@tensorflow-models/mobilenet";
 import { MobileNet } from "@tensorflow-models/mobilenet";
-import { createElement } from "react";
 
 interface DogsAPI {
   status: string;
@@ -14,11 +13,12 @@ interface Classification {
   className: string;
   probability: number;
 }
+type dogBreedsType = { [key: string]: string };
 class DogService {
-  public dogBreeds: string[];
+  public dogBreeds: dogBreedsType;
   public model: MobileNet | null = null;
   constructor() {
-    this.dogBreeds = [];
+    this.dogBreeds = {};
     this.getAllBreeds = this.getAllBreeds.bind(this);
     this.classifyDog = this.classifyDog.bind(this);
     this.loadModel = this.loadModel.bind(this);
@@ -37,18 +37,17 @@ class DogService {
     // read our JSON
     const response = await fetch("https://dog.ceo/api/breeds/list/all");
     let data: DogsAPI = await response.json();
-    let dogBreeds: string[] = [];
+    //ts doesn't support yet Maps  new Map() so I used simple object
+    let dogBreeds: dogBreedsType = {};
     if (data.status === "success") {
       Object.keys(data.message).forEach(dogName => {
-        dogBreeds.push(dogName);
+        dogBreeds[dogName.toLowerCase()] = dogName;
         data.message[dogName].forEach(dogPrefix => {
-          dogBreeds.push(dogName + "-" + dogPrefix);
+          dogBreeds[dogName.toLowerCase() + "-" + dogPrefix.toLowerCase()] =
+            dogName + dogPrefix;
         });
       });
       this.dogBreeds = dogBreeds;
-      return dogBreeds;
-    } else {
-      return [];
     }
   }
   public async loadModel() {
@@ -62,23 +61,21 @@ class DogService {
       const predictions: Classification[] = await this.model.classify(image);
       if (predictions) {
         // Could be improved with regex or binary search
-        const detectedBreed = this.dogBreeds.find(dogBreed => {
-          // many cases that i've detected
-          return (
-            dogBreed.toLowerCase() ===
-              predictions[0].className.toLowerCase().replace(" ", "-") ||
-            dogBreed.toLowerCase() ===
-              predictions[0].className.toLowerCase().replace(" ", "") ||
-            dogBreed.toLowerCase() ===
-              predictions[0].className.toLowerCase().replace("-", "")
-          );
-        });
-        if (detectedBreed) {
-          return { message: "", detectedBreed };
-        } else {
-          console.error("we don't have that dog in the db");
-          return { message: "Could not detect this dog", detectedBreed: "" };
+        for (let predicted of predictions) {
+          const predictedDog = predicted.className.toLowerCase();
+          const detectedBreed =
+            this.dogBreeds[predictedDog.replace(" ", "-")] ||
+            this.dogBreeds[predictedDog.replace(" ", "")] ||
+            this.dogBreeds[predictedDog.replace("-", "")];
+          if (detectedBreed) {
+            return { message: "", detectedBreed };
+          }
         }
+        console.error("couldn't find the dog in our db");
+        return {
+          message: "Couldn't find the dog in our db",
+          detectedBreed: ""
+        };
       } else {
         console.error("couldn't make predictions");
         return {
@@ -86,12 +83,6 @@ class DogService {
           detectedBreed: ""
         };
       }
-    } else {
-      console.error("couldn't load image");
-      return {
-        message: "Could not load image, are you sure it is a legit file?",
-        detectedBreed: ""
-      };
     }
   }
 }
