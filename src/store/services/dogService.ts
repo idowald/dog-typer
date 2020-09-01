@@ -1,5 +1,6 @@
 import * as mobilenet from "@tensorflow-models/mobilenet";
 import { MobileNet } from "@tensorflow-models/mobilenet";
+import { createElement } from "react";
 
 interface DogsAPI {
   status: string;
@@ -29,7 +30,7 @@ class DogService {
     if (data.status === "success") {
       return data.message;
     } else {
-      console.error("TODO error handling getBreedPictures");
+      console.error("could not get breed pictures");
     }
   }
   public async getAllBreeds() {
@@ -47,7 +48,6 @@ class DogService {
       this.dogBreeds = dogBreeds;
       return dogBreeds;
     } else {
-      console.error("Todo errors handling");
       return [];
     }
   }
@@ -56,20 +56,14 @@ class DogService {
     this.model = await mobilenet.load();
   }
   public async classifyDog({ url }: { url: string }) {
-    // Load the model.
-
-    // Classify the image.
-    // TODO improve instead of vanilla js to a better way with query document
-    const image = document.getElementById(
-      "placeHolderImageId"
-    ) as HTMLImageElement | null;
+    const image = document.createElement("img");
+    image.src = url;
     if (image && this.model) {
-      // this.model = await mobilenet.load();
       const predictions: Classification[] = await this.model.classify(image);
       if (predictions) {
         // Could be improved with regex or binary search
         const detectedBreed = this.dogBreeds.find(dogBreed => {
-          // a lot of many cases i've detected
+          // many cases that i've detected
           return (
             dogBreed.toLowerCase() ===
               predictions[0].className.toLowerCase().replace(" ", "-") ||
